@@ -29,8 +29,8 @@ const scheme = {
   strength: {
     one: [6, 4],
     two: [6, 4],
-    three: [4, 4],
-    four: [4, 4],
+    three: [4, 5],
+    four: [4, 5],
   },
 };
 

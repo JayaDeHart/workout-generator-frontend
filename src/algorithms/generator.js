@@ -31,22 +31,32 @@ function weekOne(orms, sets, reps) {
 function macroCycle() {
   //use the reps object here to generate mesocycles ie. reps.hypertrophy and reps.strength
   return {
-    hypertrophy: mesoCycle(reps.hypertrophy),
-    strength: mesoCycle(reps.strength),
+    hypertrophy: mesoCycle(scheme.hypertrophy),
+    strength: mesoCycle(scheme.strength),
   };
 }
 
-function mesoCycle(reps) {
-  //use the reps object here to assign reps to each week
+function mesoCycle(scheme) {
+  //generate an object with 4 weeks of lift arrays in it
+  //how to pass prevWeek to microCycle??
+  //iteratively generate the week numbers and pass them to microCycle
+  //0th week??
+  const output = {};
+  for (const [key, value] of Object.entries(scheme)) {
+    output[key] = microCycle(prevWeek, value);
+  }
 }
 
-function microCycle(prevWeek) {
+function microCycle(weekOne, scheme, weekNumber) {
   const output = [];
-  prevWeek.forEach((obj) => {
-    //generate load
-    //pass exercise name and load to eGen
-    //pass
+  const [reps, sets] = scheme;
+  weekOne.forEach((obj) => {
+    const load = volumeLoad(obj.weight, obj.sets, obj.reps);
+    const newLoad = load + load * 0.05 * weekNumber;
+    const exercise = exerciseGen(obj.exercise, newLoad, sets, reps);
+    output.push(exercise);
   });
+  return output;
 }
 
 function exerciseGen(exercise, load, sets, reps) {
