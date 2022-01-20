@@ -43,3 +43,9 @@ module.exports.scheme = scheme;
 //seems like the algorithm overestimates how large of an impact set count has on lifting ability. EX week2-week3 RxS goes down from 24->20. So, the algorithm compensates by massively increasing weight.
 
 //the weights look a little saner when I change the rep scheme to 5x5
+
+//perhaps add the option to specify a training level that modifies the load increase %
+
+//maybe make the algo run off of load = reps * weights not reps*sets*weights
+
+//if reps * weights == "intensity" and sets * reps == "volume", we could change the algorithm to increase one and decrease the other over time

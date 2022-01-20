@@ -6,14 +6,6 @@ const {
   scheme,
 } = require('./algorithms');
 
-//sample data for testing
-const orms = {
-  bench: 10,
-  squat: 11,
-  rows: 12,
-  deadlifts: 13,
-};
-
 function weekOneGen(orms, sets, reps) {
   const output = [];
   for (const [key, value] of Object.entries(orms)) {
@@ -29,7 +21,6 @@ function weekOneGen(orms, sets, reps) {
 }
 
 function macroCycle(orms) {
-  //use the reps object here to generate mesocycles ie. reps.hypertrophy and reps.strength
   const [reps, sets] = scheme.hypertrophy.week1;
   const weekOne = weekOneGen(orms, sets, reps);
 
@@ -54,7 +45,7 @@ function microCycle(scheme, weekNumber, weekOne) {
   const [reps, sets] = scheme;
   weekOne.forEach((obj) => {
     const load = volumeLoad(obj.weight, obj.sets, obj.reps);
-    const newLoad = load + load * 0.03 * weekNumber;
+    const newLoad = load + load * 0.025 * weekNumber;
     const exercise = exerciseGen(obj.exercise, newLoad, sets, reps);
     output.push(exercise);
   });
@@ -62,7 +53,6 @@ function microCycle(scheme, weekNumber, weekOne) {
 }
 
 function exerciseGen(exercise, load, sets, reps) {
-  //exercise and load
   const weight = newWeight(load, reps, sets).toFixed(1);
   return {
     exercise,
