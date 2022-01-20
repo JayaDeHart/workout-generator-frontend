@@ -14,7 +14,7 @@ const orms = {
   deadlifts: 13,
 };
 
-function weekOne(orms, sets, reps) {
+function weekOneGen(orms, sets, reps) {
   const output = [];
   for (const [key, value] of Object.entries(orms)) {
     const weight = RepsORMtoWeight(reps, 0.95 * value);
@@ -28,31 +28,33 @@ function weekOne(orms, sets, reps) {
   return output;
 }
 
-function macroCycle() {
+function macroCycle(orms) {
   //use the reps object here to generate mesocycles ie. reps.hypertrophy and reps.strength
+  const [reps, sets] = scheme.hypertrophy.week1;
+  const weekOne = weekOneGen(orms, sets, reps);
+
   return {
-    hypertrophy: mesoCycle(scheme.hypertrophy),
-    strength: mesoCycle(scheme.strength),
+    hypertrophy: mesoCycle(scheme.hypertrophy, weekOne, 0),
+    strength: mesoCycle(scheme.strength, weekOne, 4),
   };
 }
 
-function mesoCycle(scheme) {
-  //generate an object with 4 weeks of lift arrays in it
-  //how to pass prevWeek to microCycle??
-  //iteratively generate the week numbers and pass them to microCycle
-  //0th week??
+function mesoCycle(scheme, weekOne, start) {
+  let week = start;
   const output = {};
   for (const [key, value] of Object.entries(scheme)) {
-    output[key] = microCycle(prevWeek, value);
+    output[key] = microCycle(value, week, weekOne);
+    week++;
   }
+  return output;
 }
 
-function microCycle(weekOne, scheme, weekNumber) {
+function microCycle(scheme, weekNumber, weekOne) {
   const output = [];
   const [reps, sets] = scheme;
   weekOne.forEach((obj) => {
     const load = volumeLoad(obj.weight, obj.sets, obj.reps);
-    const newLoad = load + load * 0.05 * weekNumber;
+    const newLoad = load + load * 0.03 * weekNumber;
     const exercise = exerciseGen(obj.exercise, newLoad, sets, reps);
     output.push(exercise);
   });
@@ -61,7 +63,7 @@ function microCycle(weekOne, scheme, weekNumber) {
 
 function exerciseGen(exercise, load, sets, reps) {
   //exercise and load
-  const weight = newWeight(load, reps, sets);
+  const weight = newWeight(load, reps, sets).toFixed(1);
   return {
     exercise,
     weight,
@@ -70,50 +72,4 @@ function exerciseGen(exercise, load, sets, reps) {
   };
 }
 
-const hypertrophy = {
-  weekOne: [
-    {
-      exercise: 'Bench',
-      sets: 3,
-      reps: 12,
-      weight: 50,
-    },
-    {
-      sets: 3,
-      reps: 12,
-      weight: 50,
-    },
-    {
-      sets: 3,
-      reps: 12,
-      weight: 50,
-    },
-    {
-      sets: 3,
-      reps: 12,
-      weight: 50,
-    },
-  ],
-  weekTwo: {
-    bench: {
-      sets: 3,
-      reps: 12,
-      weight: 50,
-    },
-    rows: {
-      sets: 3,
-      reps: 12,
-      weight: 50,
-    },
-    squat: {
-      sets: 3,
-      reps: 12,
-      weight: 50,
-    },
-    deadlift: {
-      sets: 3,
-      reps: 12,
-      weight: 50,
-    },
-  },
-};
+module.exports.macroCycle = macroCycle;
