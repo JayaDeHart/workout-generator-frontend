@@ -34,6 +34,21 @@ const scheme = {
   },
 };
 
+const scheme2 = {
+  hypertrophy: {
+    week1: [12, 3], //36
+    week2: [12, 3],
+    week3: [10, 3], //30
+    week4: [10, 3],
+  },
+  strength: {
+    week1: [6, 4], //24
+    week2: [6, 4],
+    week3: [5, 4], //20
+    week4: [5, 4],
+  },
+};
+
 module.exports.OrmToReps = OrmToReps;
 module.exports.RepsORMtoWeight = RepsORMtoWeight;
 module.exports.volumeLoad = volumeLoad;
