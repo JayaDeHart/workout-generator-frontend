@@ -1,14 +1,38 @@
 import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
-import { useForm, Controller } from 'react-hook-form';
-import { TextInput } from 'react-native-paper';
+import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { Button } from 'react-native-paper';
+import ControlledInput from '../components/ControlledInput';
 import * as yup from 'yup';
 
 const schema = yup
   .object({
-    bench: yup.number().positive().integer().required(),
+    bench: yup
+      .number()
+      .typeError('Your answer must be a number')
+      .positive("You can't lift negative weight")
+      .required('You must enter a number'),
+    squat: yup
+      .number()
+      .typeError('Your answer must be a number')
+      .positive("You can't lift negative weight")
+      .required('You must enter a number'),
+    deadlift: yup
+      .number()
+      .typeError('Your answer must be a number')
+      .positive("You can't lift negative weight")
+      .required('You must enter a number'),
+    row: yup
+      .number()
+      .typeError('Your answer must be a number')
+      .positive("You can't lift negative weight")
+      .required('You must enter a number'),
+    ohp: yup
+      .number()
+      .typeError('Your answer must be a number')
+      .positive("You can't lift negative weight")
+      .required('You must enter a number'),
   })
   .required();
 
@@ -17,26 +41,43 @@ const OneRepMax = () => {
     control,
     formState: { errors },
     handleSubmit,
-  } = useForm({ resolver: yupResolver(schema) });
+  } = useForm({ resolver: yupResolver(schema), mode: 'onTouched' });
 
   const onSubmit = (data) => console.log(data);
 
   return (
     <View>
-      <Controller
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => (
-          <TextInput
-            style={styles.input}
-            onBlur={onBlur}
-            onChangeText={onChange}
-            value={value}
-          />
-        )}
+      <ControlledInput
+        title="Bench"
         name="bench"
+        control={control}
+        errors={errors}
       />
-
-      <Button onPress={handleSubmit(onSubmit)}>Sumbit</Button>
+      <ControlledInput
+        title="Squat"
+        name="squat"
+        control={control}
+        errors={errors}
+      />
+      <ControlledInput
+        title="Row"
+        name="row"
+        control={control}
+        errors={errors}
+      />
+      <ControlledInput
+        title="Deadlift"
+        name="deadlift"
+        control={control}
+        errors={errors}
+      />
+      <ControlledInput
+        title="Overhead Press"
+        name="ohp"
+        control={control}
+        errors={errors}
+      />
+      <Button onPress={handleSubmit(onSubmit)}>Submit</Button>
     </View>
   );
 };

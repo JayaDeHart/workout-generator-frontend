@@ -8,6 +8,7 @@ import Register from './src/screens/Register';
 import OneRepMax from './src/screens/OneRepMax';
 import Plan from './src/screens/Plan';
 import UserContext from './src/context/user';
+import PlanContext from './src/context/plan';
 
 const Stack = createNativeStackNavigator();
 
@@ -20,21 +21,23 @@ const theme = {
 function App() {
   return (
     <UserContext>
-      <PaperProvider theme={theme}>
-        <NavigationContainer>
-          <Stack.Navigator initialRouteName="Home">
-            <Stack.Screen name="Home" component={Home} />
-            <Stack.Screen name="Login" component={Login} />
-            <Stack.Screen name="Register" component={Register} />
-            <Stack.Screen name="Plan" component={Plan} />
-            <Stack.Screen
-              name="ORM"
-              component={OneRepMax}
-              options={{ title: 'One Rep Max' }}
-            />
-          </Stack.Navigator>
-        </NavigationContainer>
-      </PaperProvider>
+      <PlanContext>
+        <PaperProvider theme={theme}>
+          <NavigationContainer>
+            <Stack.Navigator initialRouteName="Home">
+              <Stack.Screen name="Home" component={Home} />
+              <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Register" component={Register} />
+              <Stack.Screen name="Plan" component={Plan} />
+              <Stack.Screen
+                name="ORM"
+                component={OneRepMax}
+                options={{ title: 'One Rep Max' }}
+              />
+            </Stack.Navigator>
+          </NavigationContainer>
+        </PaperProvider>
+      </PlanContext>
     </UserContext>
   );
 }
