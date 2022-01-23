@@ -15,3 +15,10 @@ Linear periodization is a form of periodization that perscribes a set increase i
 ## Program Generation
 
 This program uses a number of formulas and concepts to generate a periodized workout plan. The Epley formula: "ORM = weight × (1 + 0.0333 × reps)" is used to convert ORMs to different rep schemes. The concepts of volume (sets x reps) and intensity (reps x weight) are also used. A linear increase in intensity alongside a decrease in volume over the duration of the plan is used to generate the sets, reps and weight for each week of the program. For a complete look at the algorithm see: https://github.com/JayaDeHart/workout-generator-frontend/tree/main/src/algorithms
+
+## Future goals
+
+-Allow users to modify intensity slope by selecting an experience level
+-Allow users to input their own exercises
+-Allow users to design own set / rep schemes
+-Include accessory exercises

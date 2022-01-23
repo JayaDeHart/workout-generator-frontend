@@ -1,7 +1,12 @@
 import { StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useContext } from 'react';
+import { PlanContext } from '../context/plan';
 
 const Plan = () => {
+  const { plan } = useContext(PlanContext);
+
+  console.log(plan);
+
   return (
     <View>
       <Text>Here's ur dope plan</Text>
@@ -12,3 +17,5 @@ const Plan = () => {
 export default Plan;
 
 const styles = StyleSheet.create({});
+
+//https://www.npmjs.com/package/html-to-image
