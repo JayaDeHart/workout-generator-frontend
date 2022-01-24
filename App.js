@@ -9,11 +9,20 @@ import OneRepMax from './src/screens/OneRepMax';
 import Plan from './src/screens/Plan';
 import UserContext from './src/context/user';
 import PlanContext from './src/context/plan';
+import About from './src/screens/About';
 
 const Stack = createNativeStackNavigator();
 
 const theme = {
   ...DefaultTheme,
+  myOwnProperty: true,
+  colors: {
+    ...DefaultTheme.colors,
+    primary: '#2F3A8F',
+    secondary: '#FE7E6D',
+    lblue: '#CCD1E4',
+    pinktan: '#FEECE9',
+  },
 };
 
 //customize theme l8r
@@ -29,6 +38,7 @@ function App() {
               <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Register" component={Register} />
               <Stack.Screen name="Plan" component={Plan} />
+              <Stack.Screen name="About" component={About} />
               <Stack.Screen
                 name="ORM"
                 component={OneRepMax}

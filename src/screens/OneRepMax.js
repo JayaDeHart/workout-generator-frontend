@@ -1,4 +1,5 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, ScrollView } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import React, { useContext, useRef } from 'react';
 import { useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -57,7 +58,7 @@ const OneRepMax = ({ navigation }) => {
   const inputRef5 = useRef();
 
   return (
-    <View>
+    <KeyboardAwareScrollView>
       <ControlledInput
         title="Bench"
         name="bench"
@@ -99,10 +100,14 @@ const OneRepMax = ({ navigation }) => {
         nextref={null}
       />
       <Button onPress={handleSubmit(onSubmit)}>Submit</Button>
-    </View>
+    </KeyboardAwareScrollView>
   );
 };
 
 export default OneRepMax;
 
 const styles = StyleSheet.create({});
+
+//https://www.npmjs.com/package/react-native-keyboard-aware-scroll-view
+
+//figure out how to do this shid
