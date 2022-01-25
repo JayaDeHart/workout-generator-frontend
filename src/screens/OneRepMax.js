@@ -59,6 +59,9 @@ const OneRepMax = ({ navigation }) => {
 
   return (
     <KeyboardAwareScrollView>
+      <Text style={styles.header}>
+        Enter your one rep maximum for each lift
+      </Text>
       <ControlledInput
         title="Bench"
         name="bench"
@@ -66,6 +69,7 @@ const OneRepMax = ({ navigation }) => {
         errors={errors}
         ref={null}
         nextref={inputRef2}
+        inputType="numeric"
       />
       <ControlledInput
         title="Squat"
@@ -74,6 +78,7 @@ const OneRepMax = ({ navigation }) => {
         errors={errors}
         ref={inputRef2}
         nextref={inputRef3}
+        inputType="numeric"
       />
       <ControlledInput
         title="Row"
@@ -82,6 +87,7 @@ const OneRepMax = ({ navigation }) => {
         errors={errors}
         ref={inputRef3}
         nextref={inputRef4}
+        inputType="numeric"
       />
       <ControlledInput
         title="Deadlift"
@@ -90,6 +96,7 @@ const OneRepMax = ({ navigation }) => {
         errors={errors}
         ref={inputRef4}
         nextref={inputRef5}
+        inputType="numeric"
       />
       <ControlledInput
         title="Overhead Press"
@@ -98,6 +105,7 @@ const OneRepMax = ({ navigation }) => {
         errors={errors}
         ref={inputRef5}
         nextref={null}
+        inputType="numeric"
       />
       <Button onPress={handleSubmit(onSubmit)}>Submit</Button>
     </KeyboardAwareScrollView>
@@ -106,7 +114,12 @@ const OneRepMax = ({ navigation }) => {
 
 export default OneRepMax;
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  header: {
+    textAlign: 'center',
+    fontSize: 30,
+  },
+});
 
 //https://www.npmjs.com/package/react-native-keyboard-aware-scroll-view
 
