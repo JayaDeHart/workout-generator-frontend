@@ -11,9 +11,9 @@ const Plan = () => {
   return (
     <View>
       <Text>Here's ur dope plan</Text>
-      {Object.entries(plan.hypertrophy).map(([key, value]) => {
-        <Week week={key} exercise={value} />;
-      })}
+      {Object.entries(plan.hypertrophy).map(([key, value]) => (
+        <Week week={key} exercise={value} />
+      ))}
     </View>
   );
 };
