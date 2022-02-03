@@ -4,7 +4,7 @@ function OrmToReps(percent) {
 }
 
 //calculate weight given reps and one rep maximum
-function RepsORMtoWeight(reps, orm) {
+function repsORMtoWeight(reps, orm) {
   return (30 / (reps + 29.5)) * orm;
 }
 
@@ -18,23 +18,14 @@ function newWeight(load, reps, sets) {
   return load / (reps * sets);
 }
 
-//[reps,sets] for each week
-const scheme = {
-  hypertrophy: {
-    week1: [12, 3],
-    week2: [12, 3],
-    week3: [10, 3],
-    week4: [10, 3],
-  },
-  strength: {
-    week1: [6, 4],
-    week2: [6, 4],
-    week3: [5, 5],
-    week4: [5, 5],
-  },
-};
+//calculate ORM given reps and weight
+function calcORM(reps, weight) {
+  return weight * (1 + 0.0333 * reps);
+}
 
-const scheme2 = {
+//[reps,sets] for each week
+
+const scheme = {
   hypertrophy: {
     week1: [12, 3], //36
     week2: [12, 3],
@@ -50,10 +41,11 @@ const scheme2 = {
 };
 
 module.exports.OrmToReps = OrmToReps;
-module.exports.RepsORMtoWeight = RepsORMtoWeight;
+module.exports.repsORMtoWeight = repsORMtoWeight;
 module.exports.volumeLoad = volumeLoad;
 module.exports.newWeight = newWeight;
 module.exports.scheme = scheme;
+module.exports.caclORM = calcORM;
 
 //seems like the algorithm overestimates how large of an impact set count has on lifting ability. EX week2-week3 RxS goes down from 24->20. So, the algorithm compensates by massively increasing weight.
 

@@ -2,21 +2,23 @@
 
 const {
   OrmToReps,
-  RepsORMtoWeight,
+  repsORMtoWeight,
   volumeLoad,
   newWeight,
   scheme,
+  caclORM,
 } = require('./algorithms');
 
 function weekOneGen(orms, sets, reps) {
   const output = [];
   for (const [key, value] of Object.entries(orms)) {
-    const weight = RepsORMtoWeight(reps, 0.95 * value);
+    const weight = repsORMtoWeight(reps, value);
     output.push({
       exercise: key,
       weight: weight,
       sets: sets,
       reps: reps,
+      orm: value,
     });
   }
   return output;
@@ -46,21 +48,22 @@ function microCycle(scheme, weekNumber, weekOne) {
   const output = [];
   const [reps, sets] = scheme;
   weekOne.forEach((obj) => {
-    const load = volumeLoad(obj.weight, obj.sets, obj.reps);
-    const newLoad = load + load * 0.025 * weekNumber;
-    const exercise = exerciseGen(obj.exercise, newLoad, sets, reps);
+    const orm = obj.orm;
+    const neworm = orm + orm * 0.025 * weekNumber;
+    const exercise = exerciseGen(obj.exercise, neworm, sets, reps);
     output.push(exercise);
   });
   return output;
 }
 
-function exerciseGen(exercise, load, sets, reps) {
-  const weight = newWeight(load, reps, sets).toFixed(1);
+function exerciseGen(exercise, orm, sets, reps) {
+  const weight = repsORMtoWeight(reps, orm).toFixed(1);
   return {
     exercise,
     weight,
     sets,
     reps,
+    orm,
   };
 }
 

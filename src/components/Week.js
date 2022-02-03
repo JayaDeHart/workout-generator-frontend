@@ -2,7 +2,6 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 
 const Week = ({ week, exercise }) => {
-  console.log(exercise);
   return (
     <View style={styles.container}>
       <View style={styles.header}>
