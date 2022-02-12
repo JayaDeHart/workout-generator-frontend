@@ -56,6 +56,11 @@ function microCycle(scheme, weekNumber, weekOne) {
   return output;
 }
 
+//todo
+//-allow users to set modifier
+//create a "upper/lower" property on each exercise object that modifies the rate of increase
+//OR, create a "rate" property on each exercise object that modifies its own rate of increase
+
 function exerciseGen(exercise, orm, sets, reps) {
   const weight = repsORMtoWeight(reps, orm).toFixed(1);
   return {

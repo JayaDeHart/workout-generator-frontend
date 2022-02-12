@@ -18,10 +18,10 @@ const theme = {
   myOwnProperty: true,
   colors: {
     ...DefaultTheme.colors,
-    primary: '#2F3A8F',
-    secondary: '#FE7E6D',
-    lblue: '#CCD1E4',
-    pinktan: '#FEECE9',
+    lightest: '#b2bfbe',
+    mid: '#4f6866',
+    darker: '#2c4443',
+    darkest: '#1b3030',
   },
 };
 
